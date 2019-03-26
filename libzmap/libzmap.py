@@ -6,7 +6,7 @@ from threading import Thread
 
 from .parser import ZmapParser
 
-
+#ZmapProcess继承Thread
 class ZmapProcess(Thread):
     def __init__(self, targets='127.0.0.1', port=80, probe_module=None, options=None, fqp=None, yield_raw=False):
         """
@@ -36,7 +36,8 @@ class ZmapProcess(Thread):
 
         # more reliable than just using os.name() (cygwin)
         self.__is_windows = platform.system() == 'Windows'
-
+       
+        #枚举类型
         (self.DONE, self.READY, self.RUNNING,
          self.CANCELLED, self.FAILED) = list(range(5))
 
@@ -50,7 +51,8 @@ class ZmapProcess(Thread):
         else:
             self.__zmap_binary_name = 'zmap'
             self.__zmap_binary = self._whereis(self.__zmap_binary_name)
-
+   
+    #根据程序名，返回全路径名
     def _whereis(self, program):
 
         """
